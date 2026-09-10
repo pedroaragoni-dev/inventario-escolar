@@ -17,4 +17,9 @@ public class CategoriaService {
     public List<Categoria> listarTodas() {
         return categoriaRepository.findAll();
     }
+
+    public Categoria cadastrar(String nome) {
+        Categoria categoria = new Categoria(nome);
+        return categoriaRepository.save(categoria);
+    }
 }
