@@ -8,6 +8,7 @@ import java.util.List;
 import br.com.pedroaragoni.inventario.dto.CategoriaCadastroRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
 
 @RestController
 public class CategoriaController {
@@ -24,9 +25,7 @@ public class CategoriaController {
     }
 
     @PostMapping("/categorias")
-    public Categoria cadastrar(@RequestBody CategoriaCadastroRequest request) {
+    public Categoria cadastrar(@Valid @RequestBody CategoriaCadastroRequest request) {
         return categoriaService.cadastrar(request.nome());
     }
-
-
 }

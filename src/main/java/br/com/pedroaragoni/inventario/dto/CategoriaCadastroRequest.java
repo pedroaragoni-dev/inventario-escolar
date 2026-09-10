@@ -1,6 +1,9 @@
 package br.com.pedroaragoni.inventario.dto;
 
-public record CategoriaCadastroRequest(String nome) {
+import jakarta.validation.constraints.NotBlank;
 
-
+public record CategoriaCadastroRequest(
+        @NotBlank(message = "O nome da categoria é obrigatório")
+        String nome
+) {
 }
