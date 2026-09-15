@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PathVariable;
+import br.com.pedroaragoni.inventario.dto.CategoriaAlteracaoRequest;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 public class CategoriaController {
@@ -34,4 +36,18 @@ public class CategoriaController {
     public Categoria buscarPorId(@PathVariable("id") Long id) {
         return categoriaService.buscarPorId(id);
     }
+
+    @PatchMapping("/categorias/{id}")
+    public Categoria alterarNome(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody CategoriaAlteracaoRequest request) {
+
+        return categoriaService.alterarNome(id, request.nome());
+    }
+
+    @PatchMapping("/categorias/{id}/inativar")
+    public Categoria inativar(@PathVariable("id") Long id) {
+        return categoriaService.inativar(id);
+    }
+
 }

@@ -33,4 +33,21 @@ public class CategoriaService {
         Categoria categoria = new Categoria(nome);
         return categoriaRepository.save(categoria);
     }
+
+    public Categoria alterarNome(Long id, String nome) {
+        Categoria categoria = buscarPorId(id);
+
+        if (categoriaRepository.existsByNomeAndIdNot(nome, id)) {
+            throw new CategoriaJaCadastradaException();
+        }
+
+        categoria.alterarNome(nome);
+        return categoriaRepository.save(categoria);
+    }
+
+    public Categoria inativar(Long id) {
+        Categoria categoria = buscarPorId(id);
+        categoria.inativar();
+        return categoriaRepository.save(categoria);
+    }
 }
