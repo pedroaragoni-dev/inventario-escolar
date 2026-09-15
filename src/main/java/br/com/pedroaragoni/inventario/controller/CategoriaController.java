@@ -50,4 +50,9 @@ public class CategoriaController {
         return categoriaService.inativar(id);
     }
 
+    @PatchMapping("/categorias/{id}/reativar")
+    public Categoria reativar(@PathVariable("id") Long id) {
+        return categoriaService.reativar(id);
+    }
+
 }

@@ -50,4 +50,10 @@ public class CategoriaService {
         categoria.inativar();
         return categoriaRepository.save(categoria);
     }
+
+    public Categoria reativar(Long id) {
+        Categoria categoria = buscarPorId(id);
+        categoria.reativar();
+        return categoriaRepository.save(categoria);
+    }
 }
