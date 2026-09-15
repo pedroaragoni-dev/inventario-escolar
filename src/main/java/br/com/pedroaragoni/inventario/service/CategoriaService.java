@@ -20,6 +20,10 @@ public class CategoriaService {
         return categoriaRepository.findAll();
     }
 
+    public List<Categoria> listarAtivas() {
+        return categoriaRepository.findByAtivoTrue();
+    }
+
     public Categoria buscarPorId(Long id) {
         return categoriaRepository.findById(id)
                 .orElseThrow(() -> new CategoriaNaoEncontradaException(id));
@@ -56,4 +60,6 @@ public class CategoriaService {
         categoria.reativar();
         return categoriaRepository.save(categoria);
     }
+
+
 }

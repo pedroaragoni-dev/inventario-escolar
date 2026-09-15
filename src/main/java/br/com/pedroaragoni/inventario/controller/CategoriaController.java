@@ -27,6 +27,11 @@ public class CategoriaController {
         return categoriaService.listarTodas();
     }
 
+    @GetMapping("/categorias/ativas")
+    public List<Categoria> listarAtivas() {
+        return categoriaService.listarAtivas();
+    }
+
     @PostMapping("/categorias")
     public Categoria cadastrar(@Valid @RequestBody CategoriaCadastroRequest request) {
         return categoriaService.cadastrar(request.nome());
