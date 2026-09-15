@@ -9,6 +9,7 @@ import br.com.pedroaragoni.inventario.dto.CategoriaCadastroRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class CategoriaController {
@@ -27,5 +28,10 @@ public class CategoriaController {
     @PostMapping("/categorias")
     public Categoria cadastrar(@Valid @RequestBody CategoriaCadastroRequest request) {
         return categoriaService.cadastrar(request.nome());
+    }
+
+    @GetMapping("/categorias/{id}")
+    public Categoria buscarPorId(@PathVariable("id") Long id) {
+        return categoriaService.buscarPorId(id);
     }
 }
