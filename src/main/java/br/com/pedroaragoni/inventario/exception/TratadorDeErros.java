@@ -38,4 +38,12 @@ public class TratadorDeErros {
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
+
+    @ExceptionHandler(FabricanteJaCadastradoException.class)
+    public ResponseEntity<ErroResponse> tratarFabricanteJaCadastrado(
+            FabricanteJaCadastradoException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+    }
 }
