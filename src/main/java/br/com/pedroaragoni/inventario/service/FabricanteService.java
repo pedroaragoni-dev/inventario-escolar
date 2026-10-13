@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import br.com.pedroaragoni.inventario.model.Fabricante;
 import java.util.List;
 import br.com.pedroaragoni.inventario.exception.FabricanteJaCadastradoException;
+import br.com.pedroaragoni.inventario.exception.FabricanteNaoEncontradoException;
 
 @Service
 public class FabricanteService {
@@ -17,6 +18,11 @@ public class FabricanteService {
 
     public List<Fabricante> listarTodos() {
         return fabricanteRepository.findAll();
+    }
+
+    public Fabricante buscarPorId(Long id) {
+        return fabricanteRepository.findById(id)
+                .orElseThrow(() -> new FabricanteNaoEncontradoException(id));
     }
 
     public Fabricante cadastrar(String nome) {

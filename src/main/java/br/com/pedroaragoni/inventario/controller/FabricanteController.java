@@ -9,6 +9,7 @@ import br.com.pedroaragoni.inventario.dto.FabricanteCadastroRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class FabricanteController {
@@ -27,5 +28,10 @@ public class FabricanteController {
     @PostMapping("/fabricantes")
     public Fabricante cadastrar(@Valid @RequestBody FabricanteCadastroRequest request) {
         return fabricanteService.cadastrar(request.nome());
+    }
+
+    @GetMapping("/fabricantes/{id}")
+    public Fabricante buscarPorId(@PathVariable("id") Long id) {
+        return fabricanteService.buscarPorId(id);
     }
 }
