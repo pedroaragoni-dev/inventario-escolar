@@ -20,6 +20,10 @@ public class FabricanteService {
         return fabricanteRepository.findAll();
     }
 
+    public List<Fabricante> listarAtivos() {
+        return fabricanteRepository.findByAtivoTrue();
+    }
+
     public Fabricante buscarPorId(Long id) {
         return fabricanteRepository.findById(id)
                 .orElseThrow(() -> new FabricanteNaoEncontradoException(id));

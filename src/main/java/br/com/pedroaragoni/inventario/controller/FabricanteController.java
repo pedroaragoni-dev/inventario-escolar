@@ -27,6 +27,11 @@ public class FabricanteController {
         return fabricanteService.listarTodos();
     }
 
+    @GetMapping("/fabricantes/ativos")
+    public List<Fabricante> listarAtivos() {
+        return fabricanteService.listarAtivos();
+    }
+
     @PostMapping("/fabricantes")
     public Fabricante cadastrar(@Valid @RequestBody FabricanteCadastroRequest request) {
         return fabricanteService.cadastrar(request.nome());
@@ -54,4 +59,6 @@ public class FabricanteController {
     public Fabricante reativar(@PathVariable("id") Long id) {
         return fabricanteService.reativar(id);
     }
+
+
 }
