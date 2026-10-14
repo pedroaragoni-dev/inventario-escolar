@@ -33,4 +33,15 @@ public class FabricanteService {
         Fabricante fabricante = new Fabricante(nome);
         return fabricanteRepository.save(fabricante);
     }
+
+    public Fabricante alterarNome(Long id, String nome) {
+        Fabricante fabricante = buscarPorId(id);
+
+        if (fabricanteRepository.existsByNomeAndIdNot(nome, id)) {
+            throw new FabricanteJaCadastradoException();
+        }
+
+        fabricante.alterarNome(nome);
+        return fabricanteRepository.save(fabricante);
+    }
 }

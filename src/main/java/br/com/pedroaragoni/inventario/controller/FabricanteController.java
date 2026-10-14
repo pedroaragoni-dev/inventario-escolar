@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import br.com.pedroaragoni.inventario.dto.FabricanteAlteracaoRequest;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 public class FabricanteController {
@@ -33,5 +35,13 @@ public class FabricanteController {
     @GetMapping("/fabricantes/{id}")
     public Fabricante buscarPorId(@PathVariable("id") Long id) {
         return fabricanteService.buscarPorId(id);
+    }
+
+    @PatchMapping("/fabricantes/{id}")
+    public Fabricante alterarNome(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody
+            FabricanteAlteracaoRequest request) {
+        return fabricanteService.alterarNome(id, request.nome());
     }
 }
