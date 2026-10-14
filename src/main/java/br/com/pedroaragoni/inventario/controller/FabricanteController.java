@@ -44,4 +44,9 @@ public class FabricanteController {
             FabricanteAlteracaoRequest request) {
         return fabricanteService.alterarNome(id, request.nome());
     }
+
+    @PatchMapping("/fabricantes/{id}/inativar")
+    public Fabricante inativar(@PathVariable("id") Long id) {
+        return fabricanteService.inativar(id);
+    }
 }

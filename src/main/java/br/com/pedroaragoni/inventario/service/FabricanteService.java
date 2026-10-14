@@ -44,4 +44,10 @@ public class FabricanteService {
         fabricante.alterarNome(nome);
         return fabricanteRepository.save(fabricante);
     }
+
+    public Fabricante inativar(Long id) {
+        Fabricante fabricante = buscarPorId(id);
+        fabricante.inativar();
+        return fabricanteRepository.save(fabricante);
+    }
 }
