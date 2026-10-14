@@ -50,4 +50,10 @@ public class FabricanteService {
         fabricante.inativar();
         return fabricanteRepository.save(fabricante);
     }
+
+    public Fabricante reativar(Long id) {
+        Fabricante fabricante = buscarPorId(id);
+        fabricante.reativar();
+        return fabricanteRepository.save(fabricante);
+    }
 }

@@ -49,4 +49,9 @@ public class FabricanteController {
     public Fabricante inativar(@PathVariable("id") Long id) {
         return fabricanteService.inativar(id);
     }
+
+    @PatchMapping("/fabricantes/{id}/reativar")
+    public Fabricante reativar(@PathVariable("id") Long id) {
+        return fabricanteService.reativar(id);
+    }
 }
