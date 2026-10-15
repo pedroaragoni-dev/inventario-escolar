@@ -54,4 +54,13 @@ public class TratadorDeErros {
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
+
+    @ExceptionHandler(LocalizacaoJaCadastradaException.class)
+    public ResponseEntity<ErroResponse> tratarLocalizacaoJaCadastrada(
+            LocalizacaoJaCadastradaException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+    }
+
 }
