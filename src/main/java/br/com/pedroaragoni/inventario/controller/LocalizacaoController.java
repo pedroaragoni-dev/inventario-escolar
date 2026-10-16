@@ -27,6 +27,11 @@ public class LocalizacaoController {
         return localizacaoService.listarTodas();
     }
 
+    @GetMapping("/localizacoes/ativas")
+    public List<Localizacao> listarAtivas() {
+        return localizacaoService.listarAtivas();
+    }
+
     @PostMapping("/localizacoes")
     public Localizacao cadastrar(@Valid @RequestBody LocalizacaoCadastroRequest request) {
         return localizacaoService.cadastrar(
@@ -51,5 +56,15 @@ public class LocalizacaoController {
                 request.nome(),
                 request.descricao()
         );
+    }
+
+    @PatchMapping("/localizacoes/{id}/inativar")
+    public Localizacao inativar(@PathVariable("id") Long id) {
+        return localizacaoService.inativar(id);
+    }
+
+    @PatchMapping("/localizacoes/{id}/reativar")
+    public Localizacao reativar(@PathVariable("id") Long id) {
+        return localizacaoService.reativar(id);
     }
 }

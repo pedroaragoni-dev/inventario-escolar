@@ -20,6 +20,10 @@ public class LocalizacaoService {
         return localizacaoRepository.findAll();
     }
 
+    public List<Localizacao> listarAtivas() {
+        return localizacaoRepository.findByAtivoTrue();
+    }
+
     public Localizacao buscarPorId(Long id) {
         return localizacaoRepository.findById(id)
                 .orElseThrow(() -> new LocalizacaoNaoEncontradaException(id));
@@ -37,6 +41,18 @@ public class LocalizacaoService {
     public Localizacao alterarDados(Long id, String nome, String descricao) {
         Localizacao localizacao = buscarPorId(id);
         localizacao.alterarDados(nome, descricao);
+        return localizacaoRepository.save(localizacao);
+    }
+
+    public Localizacao inativar(Long id) {
+        Localizacao localizacao = buscarPorId(id);
+        localizacao.inativar();
+        return localizacaoRepository.save(localizacao);
+    }
+
+    public Localizacao reativar(Long id) {
+        Localizacao localizacao = buscarPorId(id);
+        localizacao.reativar();
         return localizacaoRepository.save(localizacao);
     }
 }
