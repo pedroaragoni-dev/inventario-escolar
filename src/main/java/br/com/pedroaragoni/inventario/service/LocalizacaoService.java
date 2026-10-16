@@ -33,4 +33,10 @@ public class LocalizacaoService {
         Localizacao localizacao = new Localizacao(codigo, nome, descricao);
         return localizacaoRepository.save(localizacao);
     }
+
+    public Localizacao alterarDados(Long id, String nome, String descricao) {
+        Localizacao localizacao = buscarPorId(id);
+        localizacao.alterarDados(nome, descricao);
+        return localizacaoRepository.save(localizacao);
+    }
 }

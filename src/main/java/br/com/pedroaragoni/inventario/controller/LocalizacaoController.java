@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
+import br.com.pedroaragoni.inventario.dto.LocalizacaoAlteracaoRequest;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 public class LocalizacaoController {
@@ -37,5 +39,17 @@ public class LocalizacaoController {
     @GetMapping("/localizacoes/{id}")
     public Localizacao buscarPorId(@PathVariable("id") Long id) {
         return localizacaoService.buscarPorId(id);
+    }
+
+    @PatchMapping("/localizacoes/{id}")
+    public Localizacao alterarDados(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody LocalizacaoAlteracaoRequest request) {
+
+        return localizacaoService.alterarDados(
+                id,
+                request.nome(),
+                request.descricao()
+        );
     }
 }
