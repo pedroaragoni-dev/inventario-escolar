@@ -9,6 +9,7 @@ import br.com.pedroaragoni.inventario.dto.LocalizacaoCadastroRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class LocalizacaoController {
@@ -31,5 +32,10 @@ public class LocalizacaoController {
                 request.nome(),
                 request.descricao()
         );
+    }
+
+    @GetMapping("/localizacoes/{id}")
+    public Localizacao buscarPorId(@PathVariable("id") Long id) {
+        return localizacaoService.buscarPorId(id);
     }
 }

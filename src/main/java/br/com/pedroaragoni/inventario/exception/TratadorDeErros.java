@@ -63,4 +63,11 @@ public class TratadorDeErros {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
 
+    @ExceptionHandler(LocalizacaoNaoEncontradaException.class)
+    public ResponseEntity<ErroResponse> tratarLocalizacaoNaoEncontrada(
+            LocalizacaoNaoEncontradaException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
 }

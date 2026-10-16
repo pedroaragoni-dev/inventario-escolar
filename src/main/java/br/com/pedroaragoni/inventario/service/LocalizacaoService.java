@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import br.com.pedroaragoni.inventario.model.Localizacao;
 import java.util.List;
 import br.com.pedroaragoni.inventario.exception.LocalizacaoJaCadastradaException;
+import br.com.pedroaragoni.inventario.exception.LocalizacaoNaoEncontradaException;
 
 @Service
 public class LocalizacaoService {
@@ -17,6 +18,11 @@ public class LocalizacaoService {
 
     public List<Localizacao> listarTodas() {
         return localizacaoRepository.findAll();
+    }
+
+    public Localizacao buscarPorId(Long id) {
+        return localizacaoRepository.findById(id)
+                .orElseThrow(() -> new LocalizacaoNaoEncontradaException(id));
     }
 
     public Localizacao cadastrar(String codigo, String nome, String descricao) {
