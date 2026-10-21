@@ -9,6 +9,9 @@ import br.com.pedroaragoni.inventario.dto.ModeloCadastroRequest;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
+import br.com.pedroaragoni.inventario.dto.ModeloAlteracaoRequest;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 public class ModeloController {
@@ -31,5 +34,18 @@ public class ModeloController {
                 request.fabricanteId(),
                 request.categoriaId()
         );
+    }
+
+    @GetMapping("/modelos/{id}")
+    public Modelo buscarPorId(@PathVariable("id") Long id) {
+        return modeloService.buscarPorId(id);
+    }
+
+    @PatchMapping("/modelos/{id}")
+    public Modelo alterarNome(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody ModeloAlteracaoRequest request) {
+
+        return modeloService.alterarNome(id, request.nome());
     }
 }

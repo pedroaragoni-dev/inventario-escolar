@@ -7,4 +7,7 @@ public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 
     boolean existsByNomeAndFabricante_IdAndCategoria_Id(
             String nome, Long fabricanteId, Long categoriaId);
+
+    boolean existsByNomeAndFabricante_IdAndCategoria_IdAndIdNot(
+            String nome, Long fabricanteId, Long categoriaId, Long id);
 }

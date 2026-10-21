@@ -78,4 +78,12 @@ public class TratadorDeErros {
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
+
+    @ExceptionHandler(ModeloNaoEncontradoException.class)
+    public ResponseEntity<ErroResponse> tratarModeloNaoEncontrado(
+            ModeloNaoEncontradoException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
 }

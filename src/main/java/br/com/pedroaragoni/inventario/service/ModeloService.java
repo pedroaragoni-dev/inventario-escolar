@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.pedroaragoni.inventario.model.Fabricante;
 import br.com.pedroaragoni.inventario.model.Categoria;
 import br.com.pedroaragoni.inventario.exception.ModeloJaCadastradoException;
+import br.com.pedroaragoni.inventario.exception.ModeloNaoEncontradoException;
 
 @Service
 public class ModeloService {
@@ -39,6 +40,26 @@ public class ModeloService {
         }
 
         Modelo modelo = new Modelo(nome, fabricante, categoria);
+        return modeloRepository.save(modelo);
+    }
+
+    public Modelo buscarPorId(Long id) {
+        return modeloRepository.findById(id)
+                .orElseThrow(() -> new ModeloNaoEncontradoException(id));
+    }
+
+    public Modelo alterarNome(Long id, String nome) {
+        Modelo modelo = buscarPorId(id);
+
+        if (modeloRepository.existsByNomeAndFabricante_IdAndCategoria_IdAndIdNot(
+                nome,
+                modelo.getFabricante().getId(),
+                modelo.getCategoria().getId(),
+                id)) {
+            throw new ModeloJaCadastradoException();
+        }
+
+        modelo.alterarNome(nome);
         return modeloRepository.save(modelo);
     }
 }
