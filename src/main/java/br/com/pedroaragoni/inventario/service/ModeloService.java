@@ -62,4 +62,20 @@ public class ModeloService {
         modelo.alterarNome(nome);
         return modeloRepository.save(modelo);
     }
+
+    public Modelo inativar(Long id) {
+        Modelo modelo = buscarPorId(id);
+        modelo.inativar();
+        return modeloRepository.save(modelo);
+    }
+
+    public Modelo reativar(Long id) {
+        Modelo modelo = buscarPorId(id);
+        modelo.reativar();
+        return modeloRepository.save(modelo);
+    }
+
+    public List<Modelo> listarAtivos() {
+        return modeloRepository.findByAtivoTrue();
+    }
 }

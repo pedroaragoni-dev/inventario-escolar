@@ -48,4 +48,19 @@ public class ModeloController {
 
         return modeloService.alterarNome(id, request.nome());
     }
+
+    @PatchMapping("/modelos/{id}/inativar")
+    public Modelo inativar(@PathVariable("id") Long id) {
+        return modeloService.inativar(id);
+    }
+
+    @PatchMapping("/modelos/{id}/reativar")
+    public Modelo reativar(@PathVariable("id") Long id) {
+        return modeloService.reativar(id);
+    }
+
+    @GetMapping("/modelos/ativos")
+    public List<Modelo> listarAtivos() {
+        return modeloService.listarAtivos();
+    }
 }

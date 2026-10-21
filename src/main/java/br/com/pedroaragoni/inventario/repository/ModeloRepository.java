@@ -2,6 +2,7 @@ package br.com.pedroaragoni.inventario.repository;
 
 import br.com.pedroaragoni.inventario.model.Modelo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 
@@ -10,4 +11,6 @@ public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 
     boolean existsByNomeAndFabricante_IdAndCategoria_IdAndIdNot(
             String nome, Long fabricanteId, Long categoriaId, Long id);
+
+    List<Modelo> findByAtivoTrue();
 }
