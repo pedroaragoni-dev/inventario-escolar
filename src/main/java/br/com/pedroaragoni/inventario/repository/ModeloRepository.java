@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ModeloRepository extends JpaRepository<Modelo, Long> {
 
-
+    boolean existsByNomeAndFabricante_IdAndCategoria_Id(
+            String nome, Long fabricanteId, Long categoriaId);
 }
