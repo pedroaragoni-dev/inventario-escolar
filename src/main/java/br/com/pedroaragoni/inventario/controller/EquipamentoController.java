@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
+import br.com.pedroaragoni.inventario.dto.EquipamentoCondicaoRequest;
+import org.springframework.web.bind.annotation.PatchMapping;
 
 @RestController
 public class EquipamentoController {
@@ -46,5 +48,17 @@ public class EquipamentoController {
     @GetMapping("/equipamentos/codigo/{codigo}")
     public Equipamento buscarPorCodigo(@PathVariable("codigo") String codigo) {
         return equipamentoService.buscarPorCodigo(codigo);
+    }
+
+    @PatchMapping("/equipamentos/{id}/condicao")
+    public Equipamento alterarCondicao(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody EquipamentoCondicaoRequest request) {
+
+        return equipamentoService.alterarCondicao(
+                id,
+                request.statusFuncionamento(),
+                request.observacoes()
+        );
     }
 }

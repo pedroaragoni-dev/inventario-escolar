@@ -72,4 +72,17 @@ public class EquipamentoService {
         return equipamentoRepository.findByIdentificadorInterno(codigo)
                 .orElseThrow(() -> new EquipamentoNaoEncontradoException(codigo));
     }
+
+    @Transactional
+    public Equipamento alterarCondicao(
+            Long id,
+            StatusFuncionamento statusFuncionamento,
+            String observacoes) {
+
+        Equipamento equipamento = buscarPorId(id);
+        equipamento.alterarStatusFuncionamento(statusFuncionamento);
+        equipamento.alterarObservacoes(observacoes);
+
+        return equipamentoRepository.save(equipamento);
+    }
 }
