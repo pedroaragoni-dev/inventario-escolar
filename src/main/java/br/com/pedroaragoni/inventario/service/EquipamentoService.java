@@ -85,4 +85,13 @@ public class EquipamentoService {
 
         return equipamentoRepository.save(equipamento);
     }
+
+    @Transactional
+    public Equipamento alterarLocalizacao(Long id, Long localizacaoId) {
+        Equipamento equipamento = buscarPorId(id);
+        Localizacao localizacao = localizacaoService.buscarPorId(localizacaoId);
+
+        equipamento.alterarLocalizacao(localizacao);
+        return equipamentoRepository.save(equipamento);
+    }
 }

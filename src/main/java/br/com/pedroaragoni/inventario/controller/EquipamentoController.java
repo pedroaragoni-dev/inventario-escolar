@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
 import br.com.pedroaragoni.inventario.dto.EquipamentoCondicaoRequest;
 import org.springframework.web.bind.annotation.PatchMapping;
+import br.com.pedroaragoni.inventario.dto.EquipamentoLocalizacaoRequest;
 
 @RestController
 public class EquipamentoController {
@@ -61,4 +62,16 @@ public class EquipamentoController {
                 request.observacoes()
         );
     }
+
+    @PatchMapping("/equipamentos/{id}/localizacao")
+    public Equipamento alterarLocalizacao(
+            @PathVariable("id") Long id,
+            @Valid @RequestBody EquipamentoLocalizacaoRequest request) {
+
+        return equipamentoService.alterarLocalizacao(
+                id,
+                request.localizacaoId()
+        );
+    }
+
 }
