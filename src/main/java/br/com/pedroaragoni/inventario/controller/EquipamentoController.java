@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import java.util.List;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @RestController
 public class EquipamentoController {
@@ -35,5 +36,15 @@ public class EquipamentoController {
                 request.statusFuncionamento(),
                 request.observacoes()
         );
+    }
+
+    @GetMapping("/equipamentos/{id}")
+    public Equipamento buscarPorId(@PathVariable("id") Long id) {
+        return equipamentoService.buscarPorId(id);
+    }
+
+    @GetMapping("/equipamentos/codigo/{codigo}")
+    public Equipamento buscarPorCodigo(@PathVariable("codigo") String codigo) {
+        return equipamentoService.buscarPorCodigo(codigo);
     }
 }

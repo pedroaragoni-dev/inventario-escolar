@@ -94,4 +94,12 @@ public class TratadorDeErros {
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
     }
+
+    @ExceptionHandler(EquipamentoNaoEncontradoException.class)
+    public ResponseEntity<ErroResponse> tratarEquipamentoNaoEncontrado(
+            EquipamentoNaoEncontradoException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
+    }
 }

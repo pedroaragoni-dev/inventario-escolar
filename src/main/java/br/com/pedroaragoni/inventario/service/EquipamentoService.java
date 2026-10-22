@@ -9,7 +9,7 @@ import br.com.pedroaragoni.inventario.model.Localizacao;
 import br.com.pedroaragoni.inventario.model.StatusFuncionamento;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Locale;
-
+import br.com.pedroaragoni.inventario.exception.EquipamentoNaoEncontradoException;
 import java.util.List;
 
 @Service
@@ -61,5 +61,15 @@ public class EquipamentoService {
         );
 
         return equipamentoRepository.save(equipamento);
+    }
+
+    public Equipamento buscarPorId(Long id) {
+        return equipamentoRepository.findById(id)
+                .orElseThrow(() -> new EquipamentoNaoEncontradoException(id));
+    }
+
+    public Equipamento buscarPorCodigo(String codigo) {
+        return equipamentoRepository.findByIdentificadorInterno(codigo)
+                .orElseThrow(() -> new EquipamentoNaoEncontradoException(codigo));
     }
 }
