@@ -86,4 +86,12 @@ public class TratadorDeErros {
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);
     }
+
+    @ExceptionHandler(EquipamentoJaCadastradoException.class)
+    public ResponseEntity<ErroResponse> tratarEquipamentoJaCadastrado(
+            EquipamentoJaCadastradoException exception) {
+
+        ErroResponse erro = new ErroResponse(exception.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+    }
 }
