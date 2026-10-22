@@ -74,4 +74,18 @@ public class EquipamentoController {
         );
     }
 
+    @PatchMapping("/equipamentos/{id}/inativar")
+    public Equipamento inativar(@PathVariable("id") Long id) {
+        return equipamentoService.inativar(id);
+    }
+
+    @PatchMapping("/equipamentos/{id}/reativar")
+    public Equipamento reativar(@PathVariable("id") Long id) {
+        return equipamentoService.reativar(id);
+    }
+
+    @GetMapping("/equipamentos/ativos")
+    public List<Equipamento> listarAtivos() {
+        return equipamentoService.listarAtivos();
+    }
 }

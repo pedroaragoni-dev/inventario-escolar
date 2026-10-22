@@ -94,4 +94,22 @@ public class EquipamentoService {
         equipamento.alterarLocalizacao(localizacao);
         return equipamentoRepository.save(equipamento);
     }
+
+    @Transactional
+    public Equipamento inativar(Long id) {
+        Equipamento equipamento = buscarPorId(id);
+        equipamento.inativar();
+        return equipamentoRepository.save(equipamento);
+    }
+
+    @Transactional
+    public Equipamento reativar(Long id) {
+        Equipamento equipamento = buscarPorId(id);
+        equipamento.reativar();
+        return equipamentoRepository.save(equipamento);
+    }
+
+    public List<Equipamento> listarAtivos() {
+        return equipamentoRepository.findByAtivoTrue();
+    }
 }

@@ -4,6 +4,7 @@ import br.com.pedroaragoni.inventario.model.Equipamento;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
+import java.util.List;
 
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> {
 
@@ -13,4 +14,6 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> 
     Long obterProximoNumeroCodigo();
 
     Optional<Equipamento> findByIdentificadorInterno(String identificadorInterno);
+
+    List<Equipamento> findByAtivoTrue();
 }
