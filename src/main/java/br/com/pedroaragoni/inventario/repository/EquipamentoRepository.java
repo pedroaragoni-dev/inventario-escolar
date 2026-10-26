@@ -16,4 +16,6 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> 
     Optional<Equipamento> findByIdentificadorInterno(String identificadorInterno);
 
     List<Equipamento> findByAtivoTrue();
+
+    List<Equipamento> findByLocalizacao_IdAndAtivoTrue(Long localizacaoId);
 }

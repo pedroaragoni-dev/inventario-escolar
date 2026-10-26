@@ -112,4 +112,11 @@ public class EquipamentoService {
     public List<Equipamento> listarAtivos() {
         return equipamentoRepository.findByAtivoTrue();
     }
+
+    public List<Equipamento> listarAtivosPorLocalizacao(Long localizacaoId) {
+        localizacaoService.buscarPorId(localizacaoId);
+
+        return equipamentoRepository
+                .findByLocalizacao_IdAndAtivoTrue(localizacaoId);
+    }
 }
