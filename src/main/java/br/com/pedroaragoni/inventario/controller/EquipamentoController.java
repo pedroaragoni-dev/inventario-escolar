@@ -1,6 +1,7 @@
 package br.com.pedroaragoni.inventario.controller;
 
 import br.com.pedroaragoni.inventario.model.Equipamento;
+import br.com.pedroaragoni.inventario.model.StatusFuncionamento;
 import br.com.pedroaragoni.inventario.service.EquipamentoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -102,4 +103,12 @@ public class EquipamentoController {
 
         return equipamentoService.contarAtivosPorLocalizacao(localizacaoId);
     }
+
+    @GetMapping("/equipamentos/ativos/status/{status}")
+    public List<Equipamento> listarAtivosPorStatus(
+            @PathVariable("status") StatusFuncionamento status) {
+
+        return equipamentoService.listarAtivosPorStatus(status);
+    }
+
 }

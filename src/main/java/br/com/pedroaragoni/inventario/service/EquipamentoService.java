@@ -125,4 +125,11 @@ public class EquipamentoService {
         return equipamentoRepository
                 .countByLocalizacao_IdAndAtivoTrue(localizacaoId);
     }
+
+    public List<Equipamento> listarAtivosPorStatus(
+            StatusFuncionamento statusFuncionamento) {
+
+        return equipamentoRepository
+                .findByStatusFuncionamentoAndAtivoTrue(statusFuncionamento);
+    }
 }

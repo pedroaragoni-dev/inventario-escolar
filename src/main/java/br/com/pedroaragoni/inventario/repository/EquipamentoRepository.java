@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.Optional;
 import java.util.List;
+import br.com.pedroaragoni.inventario.model.StatusFuncionamento;
 
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> {
 
@@ -20,4 +21,7 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> 
     List<Equipamento> findByLocalizacao_IdAndAtivoTrue(Long localizacaoId);
 
     long countByLocalizacao_IdAndAtivoTrue(Long localizacaoId);
+
+    List<Equipamento> findByStatusFuncionamentoAndAtivoTrue(
+            StatusFuncionamento statusFuncionamento);
 }
