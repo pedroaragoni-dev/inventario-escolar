@@ -6,6 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+import br.com.pedroaragoni.inventario.model.StatusFuncionamento;
 
 @RestControllerAdvice
 public class TratadorDeErros {
@@ -109,5 +112,31 @@ public class TratadorDeErros {
 
         ErroResponse erro = new ErroResponse(exception.getMessage());
         return ResponseEntity.status(HttpStatus.CONFLICT).body(erro);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErroResponse> tratarCorpoInvalido(
+            HttpMessageNotReadableException exception) {
+
+        ErroResponse erro = new ErroResponse(
+                "JSON inválido ou campo com valor incompatível com o tipo esperado");
+
+        return ResponseEntity.badRequest().body(erro);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ErroResponse> tratarParametroInvalido(
+            MethodArgumentTypeMismatchException exception) {
+
+        String mensagem;
+
+        if (exception.getRequiredType() == StatusFuncionamento.class) {
+            mensagem = "Estado de funcionamento inválido. Use OK, ATENCAO ou CRITICO";
+        } else {
+            mensagem = "Valor inválido para o parâmetro: " + exception.getName();
+        }
+
+        return ResponseEntity.badRequest()
+                .body(new ErroResponse(mensagem));
     }
 }
