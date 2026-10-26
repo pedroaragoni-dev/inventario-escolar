@@ -119,4 +119,10 @@ public class EquipamentoService {
         return equipamentoRepository
                 .findByLocalizacao_IdAndAtivoTrue(localizacaoId);
     }
+
+    public long contarAtivosPorLocalizacao(Long localizacaoId) {
+        localizacaoService.buscarPorId(localizacaoId);
+        return equipamentoRepository
+                .countByLocalizacao_IdAndAtivoTrue(localizacaoId);
+    }
 }

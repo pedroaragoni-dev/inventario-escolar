@@ -95,4 +95,11 @@ public class EquipamentoController {
 
         return equipamentoService.listarAtivosPorLocalizacao(localizacaoId);
     }
+
+    @GetMapping("/localizacoes/{localizacaoId}/equipamentos/ativos/quantidade")
+    public long contarAtivosPorLocalizacao(
+            @PathVariable("localizacaoId") Long localizacaoId) {
+
+        return equipamentoService.contarAtivosPorLocalizacao(localizacaoId);
+    }
 }

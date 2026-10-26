@@ -18,4 +18,6 @@ public interface EquipamentoRepository extends JpaRepository<Equipamento, Long> 
     List<Equipamento> findByAtivoTrue();
 
     List<Equipamento> findByLocalizacao_IdAndAtivoTrue(Long localizacaoId);
+
+    long countByLocalizacao_IdAndAtivoTrue(Long localizacaoId);
 }
