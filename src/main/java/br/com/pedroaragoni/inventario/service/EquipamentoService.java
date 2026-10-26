@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Locale;
 import br.com.pedroaragoni.inventario.exception.EquipamentoNaoEncontradoException;
 import java.util.List;
+import br.com.pedroaragoni.inventario.exception.RegistroInativoException;
 
 @Service
 public class EquipamentoService {
@@ -43,6 +44,16 @@ public class EquipamentoService {
 
         Modelo modelo = modeloService.buscarPorId(modeloId);
         Localizacao localizacao = localizacaoService.buscarPorId(localizacaoId);
+
+        if (!modelo.isAtivo()) {
+            throw new RegistroInativoException(
+                    "Não é possível cadastrar equipamento com modelo inativo");
+        }
+
+        if (!localizacao.isAtivo()) {
+            throw new RegistroInativoException(
+                    "Não é possível cadastrar equipamento em localização inativa");
+        }
 
         if (equipamentoRepository.existsByNumeroSerie(numeroSerie)) {
             throw new EquipamentoJaCadastradoException();
@@ -90,6 +101,11 @@ public class EquipamentoService {
     public Equipamento alterarLocalizacao(Long id, Long localizacaoId) {
         Equipamento equipamento = buscarPorId(id);
         Localizacao localizacao = localizacaoService.buscarPorId(localizacaoId);
+
+        if (!localizacao.isAtivo()) {
+            throw new RegistroInativoException(
+                    "Não é possível transferir equipamento para localização inativa");
+        }
 
         equipamento.alterarLocalizacao(localizacao);
         return equipamentoRepository.save(equipamento);
