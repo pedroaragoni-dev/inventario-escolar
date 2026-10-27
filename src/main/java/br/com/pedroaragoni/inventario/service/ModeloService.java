@@ -8,6 +8,7 @@ import br.com.pedroaragoni.inventario.model.Fabricante;
 import br.com.pedroaragoni.inventario.model.Categoria;
 import br.com.pedroaragoni.inventario.exception.ModeloJaCadastradoException;
 import br.com.pedroaragoni.inventario.exception.ModeloNaoEncontradoException;
+import br.com.pedroaragoni.inventario.exception.RegistroInativoException;
 
 @Service
 public class ModeloService {
@@ -33,6 +34,16 @@ public class ModeloService {
     public Modelo cadastrar(String nome, Long fabricanteId, Long categoriaId) {
         Fabricante fabricante = fabricanteService.buscarPorId(fabricanteId);
         Categoria categoria = categoriaService.buscarPorId(categoriaId);
+
+        if (!fabricante.isAtivo()) {
+            throw new RegistroInativoException(
+                    "Não é possível cadastrar modelo com fabricante inativo");
+        }
+
+        if (!categoria.isAtivo()) {
+            throw new RegistroInativoException(
+                    "Não é possível cadastrar modelo com categoria inativa");
+        }
 
         if (modeloRepository.existsByNomeAndFabricante_IdAndCategoria_Id(
                 nome, fabricanteId, categoriaId)) {
