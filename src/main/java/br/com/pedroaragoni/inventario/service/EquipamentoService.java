@@ -12,6 +12,7 @@ import java.util.Locale;
 import br.com.pedroaragoni.inventario.exception.EquipamentoNaoEncontradoException;
 import java.util.List;
 import br.com.pedroaragoni.inventario.exception.RegistroInativoException;
+import org.springframework.data.domain.Sort;
 
 @Service
 public class EquipamentoService {
@@ -31,7 +32,9 @@ public class EquipamentoService {
     }
 
     public List<Equipamento> listarTodos() {
-        return equipamentoRepository.findAll();
+        return equipamentoRepository.findAll(
+                Sort.by(Sort.Direction.ASC, "identificadorInterno")
+        );
     }
 
     @Transactional
